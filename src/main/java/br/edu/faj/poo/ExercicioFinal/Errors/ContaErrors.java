@@ -7,6 +7,12 @@ public class ContaErrors {
         }
     }
 
+    public static class ContaNaoExisteException extends RuntimeException {
+        public ContaNaoExisteException() {
+            super("Conta não existe!");
+        }
+    }
+
     public static class CredenciaisInvalidasException extends RuntimeException {
         public CredenciaisInvalidasException() {
             super("Credenciais inválidas!");
