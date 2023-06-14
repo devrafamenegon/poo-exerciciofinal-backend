@@ -2,6 +2,20 @@
 
 Este é um projeto que implementa uma API RESTful para cadastro de contas de usuário e produtos. A API oferece diversas rotas para realizar operações relacionadas a contas e produtos.
 
+## Arquitetura
+
+A API foi desenvolvida seguindo a arquitetura geralmente conhecida como "Controller-Service-Repository" (ou simplesmente "CSR").
+
+- **Controllers**: Os controllers são responsáveis por receber as requisições HTTP, interpretá-las e acionar as ações apropriadas. Eles recebem os dados enviados pelos clientes e os encaminham para os serviços correspondentes. Os controllers também são responsáveis por retornar as respostas adequadas para as requisições.
+
+- **Services**: Os services são responsáveis por implementar a lógica de negócio da aplicação. Eles encapsulam as operações relacionadas às regras de negócio e interagem com os repositories para acessar e manipular os dados. Os services são acionados pelos controllers para executar as operações solicitadas.
+
+- **Repositories**: Os repositories são responsáveis pelo acesso aos dados da aplicação. Eles fornecem métodos para realizar operações de leitura e gravação nos dados armazenados, abstraindo a complexidade das operações de acesso ao banco de dados. Os repositories são acionados pelos services para acessar os dados necessários.
+
+- **DTOs**: Os DTOs (Data Transfer Objects) são objetos utilizados para transferir dados entre as diferentes camadas da aplicação. Eles representam uma estrutura simplificada dos dados a serem transmitidos e ajudam a evitar o vazamento de informações sensíveis. Os DTOs são utilizados para receber e enviar dados nas requisições e respostas da API.
+
+- **Errors**: A API utiliza uma estrutura de tratamento de erros para lidar com exceções e retornar respostas apropriadas em caso de falhas. Os erros são representados por objetos específicos que contêm informações sobre a falha ocorrida. Esses objetos são transformados em respostas JSON para fornecer informações detalhadas sobre o erro ao cliente.
+
 ## Rotas
 
 A seguir estão listadas as rotas disponíveis na API, juntamente com seus métodos HTTP correspondentes e uma breve descrição:
