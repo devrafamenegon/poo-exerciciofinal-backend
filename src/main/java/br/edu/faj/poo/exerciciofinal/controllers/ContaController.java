@@ -1,10 +1,12 @@
-package br.edu.faj.poo.ExercicioFinal.Controllers;
+package br.edu.faj.poo.exerciciofinal.controllers;
 
-import br.edu.faj.poo.ExercicioFinal.Dtos.ResponseCadastrarLogin;
-import br.edu.faj.poo.ExercicioFinal.Dtos.ResponseLogin;
-import br.edu.faj.poo.ExercicioFinal.Entities.Conta;
-import br.edu.faj.poo.ExercicioFinal.Errors.ContaErrors;
-import br.edu.faj.poo.ExercicioFinal.Services.ContaService;
+import br.edu.faj.poo.exerciciofinal.dtos.RequestLogin;
+import br.edu.faj.poo.exerciciofinal.dtos.ResponseCadastrarLogin;
+import br.edu.faj.poo.exerciciofinal.dtos.ResponseLogin;
+import br.edu.faj.poo.exerciciofinal.dtos.ResponseObterContas;
+import br.edu.faj.poo.exerciciofinal.entities.Conta;
+import br.edu.faj.poo.exerciciofinal.errors.ContaErrors;
+import br.edu.faj.poo.exerciciofinal.services.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,16 +34,26 @@ public class ContaController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseLogin> login(@RequestBody Conta conta) {
+    public ResponseEntity<ResponseLogin> login(@RequestBody RequestLogin requestLogin) {
         try {
-            contaService.logar(conta);
-            return ResponseEntity.badRequest().body(new ResponseLogin("OK", "adm", null));
+            contaService.logar(requestLogin);
+            return ResponseEntity.ok().body(new ResponseLogin("OK", "adm", null));
         } catch (Exception e) {
             if (e instanceof ContaErrors.CredenciaisInvalidasException) {
                 return ResponseEntity.badRequest().body(new ResponseLogin("NOK", null, "Senha inválida"));
             }
 
             return ResponseEntity.internalServerError().body(new ResponseLogin("NOK", null, "Erro inesperado"));
+        }
+    }
+
+    @GetMapping("/conta")
+    public ResponseEntity<ResponseObterContas> obter() {
+        try {
+            List<Conta> contas = contaService.obter();
+            return ResponseEntity.ok().body(new ResponseObterContas("OK", contas, null));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ResponseObterContas("NOK", null, "Erro inesperado"));
         }
     }
 }

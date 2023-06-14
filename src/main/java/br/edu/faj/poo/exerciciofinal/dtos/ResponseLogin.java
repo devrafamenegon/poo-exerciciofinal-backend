@@ -1,4 +1,4 @@
-package br.edu.faj.poo.ExercicioFinal.Dtos;
+package br.edu.faj.poo.exerciciofinal.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package br.edu.faj.poo.ExercicioFinal.Errors;
+package br.edu.faj.poo.exerciciofinal.errors;
 
 public class ContaErrors {
     public static class ContaJaExisteException extends RuntimeException {

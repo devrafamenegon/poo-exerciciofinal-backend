@@ -1,11 +1,11 @@
-package br.edu.faj.poo.ExercicioFinal.Services;
+package br.edu.faj.poo.exerciciofinal.services;
 
-import br.edu.faj.poo.ExercicioFinal.Entities.Conta;
-import br.edu.faj.poo.ExercicioFinal.Entities.Produto;
-import br.edu.faj.poo.ExercicioFinal.Errors.ContaErrors;
-import br.edu.faj.poo.ExercicioFinal.Errors.ProdutoErrors;
-import br.edu.faj.poo.ExercicioFinal.Repositories.ContaRepository;
-import br.edu.faj.poo.ExercicioFinal.Repositories.ProdutoRepository;
+import br.edu.faj.poo.exerciciofinal.entities.Conta;
+import br.edu.faj.poo.exerciciofinal.entities.Produto;
+import br.edu.faj.poo.exerciciofinal.errors.ContaErrors;
+import br.edu.faj.poo.exerciciofinal.errors.ProdutoErrors;
+import br.edu.faj.poo.exerciciofinal.repositories.ContaRepository;
+import br.edu.faj.poo.exerciciofinal.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +37,15 @@ public class ProdutoService {
 
     public List<Produto> obterPorContaId(int contaId) throws Exception {
         return produtoRepository.obterPorContaId(contaId);
+    }
+
+    public List<Produto> obterPorContaLogin(String contaLogin) throws Exception {
+        Conta conta = contaRepository.obterPorLogin(contaLogin);
+        if (conta == null) {
+            throw new ContaErrors.ContaNaoExisteException();
+        }
+
+        return produtoRepository.obterPorContaId(conta.getId());
     }
 
     public void excluir(int id) throws Exception {

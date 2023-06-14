@@ -1,6 +1,6 @@
-package br.edu.faj.poo.ExercicioFinal.Repositories;
+package br.edu.faj.poo.exerciciofinal.repositories;
 
-import br.edu.faj.poo.ExercicioFinal.Entities.Conta;
+import br.edu.faj.poo.exerciciofinal.entities.Conta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

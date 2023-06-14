@@ -1,11 +1,10 @@
-package br.edu.faj.poo.ExercicioFinal.Controllers;
+package br.edu.faj.poo.exerciciofinal.controllers;
 
-import br.edu.faj.poo.ExercicioFinal.Dtos.*;
-import br.edu.faj.poo.ExercicioFinal.Entities.Conta;
-import br.edu.faj.poo.ExercicioFinal.Entities.Produto;
-import br.edu.faj.poo.ExercicioFinal.Errors.ContaErrors;
-import br.edu.faj.poo.ExercicioFinal.Errors.ProdutoErrors;
-import br.edu.faj.poo.ExercicioFinal.Services.ProdutoService;
+import br.edu.faj.poo.exerciciofinal.dtos.*;
+import br.edu.faj.poo.exerciciofinal.entities.Produto;
+import br.edu.faj.poo.exerciciofinal.errors.ContaErrors;
+import br.edu.faj.poo.exerciciofinal.errors.ProdutoErrors;
+import br.edu.faj.poo.exerciciofinal.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +46,20 @@ public class ProdutoController {
     public ResponseEntity<ResponseObterProdutos> obterPorContaId(@PathVariable("contaId") int contaId) {
         try {
             List<Produto> produtos = produtoService.obterPorContaId(contaId);
+            return ResponseEntity.ok().body(new ResponseObterProdutos("OK", produtos, null));
+        } catch (Exception e) {
+            if (e instanceof ContaErrors.ContaNaoExisteException) {
+                return ResponseEntity.badRequest().body(new ResponseObterProdutos("NOK", null, "Conta não existe"));
+            }
+
+            return ResponseEntity.internalServerError().body(new ResponseObterProdutos("NOK", null, "Erro inesperado"));
+        }
+    }
+
+    @GetMapping("/produto/conta/login/{contaLogin}")
+    public ResponseEntity<ResponseObterProdutos> obterPorContaLogin(@PathVariable("contaLogin") String contaLogin) {
+        try {
+            List<Produto> produtos = produtoService.obterPorContaLogin(contaLogin);
             return ResponseEntity.ok().body(new ResponseObterProdutos("OK", produtos, null));
         } catch (Exception e) {
             if (e instanceof ContaErrors.ContaNaoExisteException) {

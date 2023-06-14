@@ -1,10 +1,8 @@
-package br.edu.faj.poo.ExercicioFinal.Dtos;
+package br.edu.faj.poo.exerciciofinal.dtos;
 
-import br.edu.faj.poo.ExercicioFinal.Entities.Produto;
+import br.edu.faj.poo.exerciciofinal.entities.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

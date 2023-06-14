@@ -1,4 +1,4 @@
-package br.edu.faj.poo.ExercicioFinal.Errors;
+package br.edu.faj.poo.exerciciofinal.errors;
 
 public class ProdutoErrors {
     public static class ProdutoNaoExisteException extends RuntimeException {
